@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Alumni</title>
+</head>
+<body>
+    <div>
+        <h4>View Alumnus</h4>
+        <form action="/view_alumnus" method="POST">
+            <input type="text" id="name" name="name" placeholder="Alumnus Name" required>
+            <button type="reset">Reset</button>
+            <button type="submit">View</button>
+        </form>
+        <br>
+    </div>
+    <div>
+        <h4>Add Alumnus</h4>
+        <form action="/add_alumnus" method="POST">
+            <input type="text" id="name" name="name" placeholder="Alumnus Name" required>
+            <select name="program" id="program" required>
+                <option value="" disabled>Select Program</option>
+                <option value="Computing">Computing</option>
+                <option value="Business Management">Business Management</option>
+                <option value="Social Science">Social Science</option>
+            </select>
+            <input type="number" id="grad_year" name="grad_year" min="1900" max="2099" step="1" placeholder="Grad Year" required >
+            <input type="reset" value="Reset">
+            <input type="submit" value="Add Alumnus">
+        </form>
+        <br>
+    </div>
+    <div>
+        <h4>Update Alumnus</h4>
+        <form action="/update_alumnus" method="POST">
+            <input type="text" id="name" name="name" placeholder="Alumnus Name" required>
+            <input type="number" id="grad_year" name="grad_year" min="1900" max="2099" step="1" placeholder="Grad Year" required >
+            <input type="reset" value="Reset">
+            <input type="submit" value="Update Alumnus">
+        </form>
+        <br>
+    </div>
+    <div>
+        <h4>Delete Alumnus</h4>
+        <form action="/delete_alumnus" method="POST">
+            <input type="text" name="name" id="name" placeholder="Alumnus Name" required>
+            <input type="reset" value="Reset">
+            <input type="submit" value="Delete Alumnus">
+        </form>
+        <br>
+    </div>
+    <div>
+        <h4>View All Alumni</h4>
+        <form action="/all_alumni" method="POST">
+            <input type="submit" value="View All Alumni">
+        </form>
+    </div>
+</body>
+</html>

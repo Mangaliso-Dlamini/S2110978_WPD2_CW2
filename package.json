@@ -1,0 +1,17 @@
+{
+  "name": "cw1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mangaliso Linda Dlamini",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mustache-express": "^1.3.2",
+    "nedb": "^1.8.0",
+    "path": "^0.12.7"
+  }
+}

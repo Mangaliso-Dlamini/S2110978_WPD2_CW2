@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Alumni Website</title>
+  </head>
+  <body>
+    <h1>Alumni List</h1>
+    <ul>
+      {{#alumni}}
+      <li>{{name}} (Class of {{gradYear}})</li>
+      {{/alumni}}
+    </ul>
+
+    <h2>Add New Alumni</h2>
+    <form action="/add" method="post">
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name" required>
+      <br>
+      <label for="gradYear">Graduation Year:</label>
+      <input type="number" name="gradYear" id="gradYear" required>
+      <br>
+      <button type="submit">Add Alumni</button>
+    </form>
+  </body>
+</html>
