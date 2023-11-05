@@ -22,6 +22,7 @@ router.post("/delete_alumnus", controller.delete_alumnus);
 router.post('/all_alumni', controller.all_alumni);
 
 router.get('/about', controller.about)
+router.get('login' controller.login)
 router.get('/manage_events', controller.manage_events)
 router.get('/manage_alumni', controller.manage_alumni)
 

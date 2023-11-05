@@ -16,6 +16,10 @@ exports.about = function(req, res){
     res.redirect('/about.html');
 }
 
+exports.login = function(req, res){
+    res.redirect('/login.html');
+}
+
 exports.manage_events = function(req, res){
     res.redirect('/manage_events.html');
 }
