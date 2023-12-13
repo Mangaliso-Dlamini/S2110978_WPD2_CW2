@@ -1,1 +1,5 @@
-{"name":"Career Fair","category":"Professional Development","date":"2023-11-13","time":"12:30","_id":"ewM0NVbVHgVqwtnH"}
+{"name":"Homecoming","organiser":"Mangaliso","organiser_id":"E201900540","category":"Campus Event","date":"2023-12-20","time":"22:06","_id":"83RhjVjK8vTN0Hq4"}
+{"name":"Prom Formal","organiser":"Meestar Manga","organiser_id":"E201900540","category":"Networking Event","date":"2023-12-24","time":"15:30","_id":"HKXmygh8QGNu64Pu"}
+{"name":"Career Fair","category":"Professional Development","date":"2023-11-13","time":"12:30","_id":"ewM0NVbVHgVqwtnH","participants":[]}
+{"name":"Tech Conference","organiser":"Meestar Manga","category":"Professional Development","date":"2024-02-09","time":"10:00","_id":"nfr3UdPfwN9fPQWS","participants":[]}
+{"name":"Career Fair","organiser":"Mangaliso","category":"Campus Event","date":"2023-12-25","time":"19:50","_id":"sPlHIBLYJ8cK4Vu7"}

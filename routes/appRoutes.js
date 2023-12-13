@@ -4,8 +4,12 @@ const router = express.Router();
 
 const controller = require('../controllers/appControllers.js');
 
+const auth = require('../auth/auth.js');
+const {ensureLoggedIn} = require('connect-ensure-login');
+
 router.get("/", controller.landing_page);
-router.get('/dashboard', controller.dashboard);
+router.get('/dashboard', auth.isAuthenticated, controller.dashboard);
+router.get('/admin_dashboard', auth.isAdmin, controller.admin_dashboard);
 
 //CRUD routes - Events
 router.post("/view_event", controller.view_event)
@@ -22,9 +26,29 @@ router.post("/delete_alumnus", controller.delete_alumnus);
 router.post('/all_alumni', controller.all_alumni);
 
 router.get('/about', controller.about)
-router.get('/login', controller.login)
-router.get('/manage_events', controller.manage_events)
-router.get('/manage_alumni', controller.manage_alumni)
+//router.get('/login', controller.login)
+router.get('/manage_events', auth.isAuthenticated, controller.manage_events)
+router.get('/manage_alumni', auth.isAuthenticated, controller.manage_alumni)
+
+//authentication
+router.get('/register', controller.register);
+router.get('/login', controller.login);
+router.post('/register', controller.new_user);
+router.post("/login", controller.post_login);
+
+router.get('/logout', controller.logout);
+
+router.get('/loggedIn_landing', auth.isAuthenticated, controller.loggedIn_landing);
+
+// Routes
+/*router.get('/', auth.isAuthenticated, (req, res) => {
+    res.send('Home Page - Welcome!');
+  });*/
+  
+
+//add particpants
+router.post('/add_participant', controller.add_participant)
+router.post('/unparticipate', controller.unparticipate)
 
 router.use(function(req, res) {
     res.status(404);

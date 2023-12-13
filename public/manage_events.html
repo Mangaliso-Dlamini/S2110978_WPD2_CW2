@@ -19,6 +19,7 @@
         <h4>Add Event</h4>
         <form action="/add_event" method="POST">
             <input type="text" id="name" name="name" placeholder="Event Name" required>
+            <input type="text" id="organiser" name="organiser" placeholder="Organiser Name" required>
             <select name="category" id="category" required>
                 <option value="" disabled>Select Category</option>
                 <option value="Professional Development">Professional Development</option>
@@ -36,6 +37,7 @@
         <h4>Update Event</h4>
         <form action="/update_event" method="POST">
             <input type="text" id="name" name="name" placeholder="Event Name" required>
+            <input type="text" id="organiser" name="organiser" placeholder="Organiser Name" required>
             <input type="date" name="date" id="date">
             <input type="reset" value="Reset">
             <input type="submit" value="Update Event">
@@ -48,6 +50,15 @@
             <input type="text" name="name" id="name" placeholder="Event Name" requied>
             <input type="reset" value="Reset">
             <input type="submit" value="Delete Event">
+        </form>
+        <br>
+    </div>
+    <div>
+        <h4>Add Participants</h4>
+        <form action="/add_participant" method="POST">
+            <input type="text" name="name" id="name" placeholder="Event Name" requied>
+            <input type="reset" value="Reset">
+            <input type="submit" value="Add Participant">
         </form>
         <br>
     </div>

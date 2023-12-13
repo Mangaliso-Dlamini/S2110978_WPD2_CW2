@@ -1,10 +1,194 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <title>About</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Alumni Website - About us</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Custom Google font-->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
     </head>
-    <body>
-        <h3>About us</h3>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Est delectus, aut repellat dolore dolorem eveniet maiores nesciunt. At ullam delectus eius fuga, maxime velit corrupti voluptatem laboriosam ratione pariatur voluptatibus.</p>
+    <body class="d-flex flex-column h-100">
+        <main class="flex-shrink-0">
+            <!-- Navigation-->
+            <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+                <div class="container px-5">
+                    <a class="navbar-brand" href="index.html"><span class="fw-bolder text-primary">MNHS Alumni Association</span></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
+                            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/register">Sign Up</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Header-->
+           
+            <!-- About Section-->
+            <section class="bg-light py-5">
+                <div class="container px-5">
+                    <div class="row gx-5 justify-content-center">
+                        <div class="col-xxl-8">
+                            <div class="text-center my-5">
+                                <h2 class="display-5 fw-bolder"><span class="text-gradient d-inline">About Us</span></h2>
+                                <p class="lead fw-light mb-4">We are the Alumni of Manzini Nazarene High School</p>
+                                <p class="text-muted">
+                                    Welcome to the MNHS Alumni Association, where the journey doesn't end at graduation; it's a lifelong connection. Our association is more than just a collective of graduates; it's a vibrant community driven by shared experiences, cherished memories, and a commitment to continued success.
+                                    <br><br>
+                                    At the MNHS Alumni Association, we believe in fostering connections that endure. Whether you're a recent graduate embarking on new adventures or a seasoned professional reflecting on the paths you've paved, our association is your anchor. We take pride in celebrating the diverse achievements of our alumni, from groundbreaking careers to impactful contributions in their communities.
+                                    <br><br>
+                                    Our mission is simple yet profound: to create a space where alumni can reconnect, network, and contribute to the collective growth of our community. Through events, mentorship programs, and collaborative initiatives, we aim to empower each member to thrive in their respective fields while staying deeply rooted in the spirit of our alma mater.
+                                    <br><br>
+                                    Join us as we continue to build bridges between the past, present, and future. Together, we are more than graduates; we are a legacy, a testament to the enduring strength of our shared experiences.
+                                    <br><br>
+                                    Here's to the memories we've created, the challenges we've overcome, and the endless possibilities that lie ahead. Together, we are the MNHS Alumni Association.
+
+
+                                </p>
+                                <div class="d-flex justify-content-center fs-2 gap-4">
+                                    <a class="text-gradient" href="#!"><i class="bi bi-twitter"></i></a>
+                                    <a class="text-gradient" href="#!"><i class="bi bi-linkedin"></i></a>
+                                    <a class="text-gradient" href="#!"><i class="bi bi-github"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="bg-light py-5">
+                <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
+                    <ul class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
+                        <li class="nav-item">
+                            <a class="d-flex align-items-center text-start mx-3 ms-0 pb-3 active" data-bs-toggle="pill" href="#tab-1">
+                                <h6 class="mt-n1 mb-0">Professional Development Events</h6>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="d-flex align-items-center text-start mx-3 pb-3" data-bs-toggle="pill" href="#tab-2">
+                                <h6 class="mt-n1 mb-0">Networking Events</h6>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="d-flex align-items-center text-start mx-3 me-0 pb-3" data-bs-toggle="pill" href="#tab-3">
+                                <h6 class="mt-n1 mb-0">Campus Events</h6>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="tab-1" class="tab-pane fade show p-0 active">
+                            <section>
+                                <div class="d-flex align-items-center justify-content-between mb-4">
+                                    <h2 class="text-primary fw-bolder mb-0">Events</h2>
+                                </div>
+                                <!-- Event Card-->
+                                {{#pro_events}}
+                                <div class="card shadow border-0 rounded-4 mb-5">
+                                    <div class="card-body p-5">
+                                        <div class="row align-items-center gx-5">
+                                            <div class="col text-center text-lg-start mb-4 mb-lg-0">
+                                                <div class="bg-light p-4 rounded-4">
+                                                    <div class="text-primary fw-bolder mb-2">Name: {{name}}</div>
+                                                    <div class="small fw-bolder">Category: {{category}}</div>
+                                                    <div class="small text-muted">Date: {{date}}</div>
+                                                    <div class="small text-muted">Time: {{time}}</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8"><div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus laudantium, voluptatem quis repellendus eaque sit animi illo ipsam amet officiis corporis sed aliquam non voluptate corrupti excepturi maxime porro fuga.</div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{/pro_events}}
+                            </section>
+                            
+                        </div>
+                        <div id="tab-2" class="tab-pane fade show p-0">
+                            <div id="tab-1" class="tab-pane fade show p-0 active">
+                                <section>
+                                    <div class="d-flex align-items-center justify-content-between mb-4">
+                                        <h2 class="text-primary fw-bolder mb-0">Events</h2>
+                                    </div>
+                                    <!-- Event Card-->
+                                    {{#net_events}}
+                                    <div class="card shadow border-0 rounded-4 mb-5">
+                                        <div class="card-body p-5">
+                                            <div class="row align-items-center gx-5">
+                                                <div class="col text-center text-lg-start mb-4 mb-lg-0">
+                                                    <div class="bg-light p-4 rounded-4">
+                                                        <div class="text-primary fw-bolder mb-2">Name: {{name}}</div>
+                                                        <div class="small fw-bolder">Category: {{category}}</div>
+                                                        <div class="small text-muted">Date: {{date}}</div>
+                                                        <div class="small text-muted">Time: {{time}}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-8"><div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus laudantium, voluptatem quis repellendus eaque sit animi illo ipsam amet officiis corporis sed aliquam non voluptate corrupti excepturi maxime porro fuga.</div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{/net_events}}
+                                </section>
+                            </div>
+                        </div>
+                        <div id="tab-3" class="tab-pane fade show p-0">
+                            <div id="tab-1" class="tab-pane fade show p-0 active">
+                                <section>
+                                    <div class="d-flex align-items-center justify-content-between mb-4">
+                                        <h2 class="text-primary fw-bolder mb-0">Events</h2>
+                                    </div>
+                                    <!-- Event Card-->
+                                    {{#cam_events}}
+                                    <div class="card shadow border-0 rounded-4 mb-5">
+                                        <div class="card-body p-5">
+                                            <div class="row align-items-center gx-5">
+                                                <div class="col text-center text-lg-start mb-4 mb-lg-0">
+                                                    <div class="bg-light p-4 rounded-4">
+                                                        <div class="text-primary fw-bolder mb-2">Name: {{name}}</div>
+                                                        <div class="small fw-bolder">Category: {{category}}</div>
+                                                        <div class="small text-muted">Date: {{date}}</div>
+                                                        <div class="small text-muted">Time: {{time}}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-8"><div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus laudantium, voluptatem quis repellendus eaque sit animi illo ipsam amet officiis corporis sed aliquam non voluptate corrupti excepturi maxime porro fuga.</div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{/cam_events}}
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!-- Footer-->
+        <footer class="bg-white py-4 mt-auto">
+            <div class="container px-5">
+                <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+                    <div class="col-auto"><div class="small m-0">Copyright &copy; MNHS Alumni Association</div></div>
+                    <div class="col-auto">
+                        <a class="small" href="#!">Privacy</a>
+                        <span class="mx-1">&middot;</span>
+                        <a class="small" href="#!">Terms</a>
+                        <span class="mx-1">&middot;</span>
+                        <a class="small" href="#!">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
     </body>
 </html>

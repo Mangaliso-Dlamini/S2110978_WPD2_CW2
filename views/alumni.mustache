@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="eng">
     <head>
+    {{>header}}
     </head>
     <body>
+        <main class="flex-shrink-0">
+        {{>nav}}
         <h3>Alumni Records</h3>
         {{#alumni}}
         <div>
@@ -12,5 +15,7 @@
         <hr>
         </div>
         {{/alumni}}
+        </main>
+        {{>footer}}
     </body>
 </html>

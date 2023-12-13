@@ -1,17 +1,147 @@
 <!DOCTYPE html>
 <html lang="eng">
     <head>
+    {{>header}}
     </head>
     <body>
-        <h3>Events</h3>
-        {{#events}}
-        <div>
-        <p>Name: {{name}}</p>
-        <p>Category: {{category}}</p>
-        <p>Date: {{date}}</p>
-        <p>Time: {{time}}</p>
-        <hr>
-        </div>
-        {{/events}}
+    <main class="flex-shrink-0">
+    {{>nav}}
+        <section class="bg-light py-5">
+                <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
+                    <ul class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
+                        <li class="nav-item">
+                            <a class="d-flex align-items-center text-start mx-3 ms-0 pb-3 active" data-bs-toggle="pill" href="#tab-1">
+                                <h6 class="mt-n1 mb-0">Professional Development Events</h6>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="d-flex align-items-center text-start mx-3 pb-3" data-bs-toggle="pill" href="#tab-2">
+                                <h6 class="mt-n1 mb-0">Networking Events</h6>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="d-flex align-items-center text-start mx-3 me-0 pb-3" data-bs-toggle="pill" href="#tab-3">
+                                <h6 class="mt-n1 mb-0">Campus Events</h6>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="tab-1" class="tab-pane fade show p-0 active">
+                            <section>
+                                <div class="d-flex align-items-center justify-content-between mb-4">
+                                    <h2 class="text-primary fw-bolder mb-0">Events</h2>
+                                </div>
+                                <!-- Event Card-->
+                                {{#pro_events}}
+                                <div class="card shadow border-0 rounded-4 mb-5">
+                                    <div class="card-body p-5">
+                                        <div class="row align-items-center gx-5">
+                                            <div class="col text-center text-lg-start mb-4 mb-lg-0">
+                                                <div class="bg-light p-4 rounded-4">
+                                                    <div class="text-primary fw-bolder mb-2">Name: {{name}}</div>
+                                                    <div class="small fw-bolder">Category: {{category}}</div>
+                                                    <div class="small text-muted">Date: {{date}}</div>
+                                                    <div class="small text-muted">Time: {{time}}</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div>
+                                                    <a class="btn btn-primary px-4 py-3" href="#!">
+                                                        <div class="d-inline-block bi bi-download me-2"></div>
+                                                        Update
+                                                    </a>
+                                                    <a class="btn btn-primary px-4 py-3" href="#!">
+                                                        <div class="d-inline-block bi bi-download me-2"></div>
+                                                        Delete
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{/pro_events}}
+                            </section>
+                            
+                        </div>
+                        <div id="tab-2" class="tab-pane fade show p-0">
+                            <div id="tab-1" class="tab-pane fade show p-0 active">
+                                <section>
+                                    <div class="d-flex align-items-center justify-content-between mb-4">
+                                        <h2 class="text-primary fw-bolder mb-0">Events</h2>
+                                    </div>
+                                    <!-- Event Card-->
+                                    {{#net_events}}
+                                    <div class="card shadow border-0 rounded-4 mb-5">
+                                        <div class="card-body p-5">
+                                            <div class="row align-items-center gx-5">
+                                                <div class="col text-center text-lg-start mb-4 mb-lg-0">
+                                                    <div class="bg-light p-4 rounded-4">
+                                                        <div class="text-primary fw-bolder mb-2">Name: {{name}}</div>
+                                                        <div class="small fw-bolder">Category: {{category}}</div>
+                                                        <div class="small text-muted">Date: {{date}}</div>
+                                                        <div class="small text-muted">Time: {{time}}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <div>
+                                                        <a class="btn btn-primary px-4 py-3" href="#!">
+                                                            <div class="d-inline-block bi bi-download me-2"></div>
+                                                            Update
+                                                        </a>
+                                                        <a class="btn btn-primary px-4 py-3" href="#!">
+                                                            <div class="d-inline-block bi bi-download me-2"></div>
+                                                            Delete
+                                                        </a>
+                                                    </div>
+                                                </div>                                            </div>
+                                        </div>
+                                    </div>
+                                    {{/net_events}}
+                                </section>
+                            </div>
+                        </div>
+                        <div id="tab-3" class="tab-pane fade show p-0">
+                            <div id="tab-1" class="tab-pane fade show p-0 active">
+                                <section>
+                                    <div class="d-flex align-items-center justify-content-between mb-4">
+                                        <h2 class="text-primary fw-bolder mb-0">Events</h2>
+                                    </div>
+                                    <!-- Event Card-->
+                                    {{#cam_events}}
+                                    <div class="card shadow border-0 rounded-4 mb-5">
+                                        <div class="card-body p-5">
+                                            <div class="row align-items-center gx-5">
+                                                <div class="col text-center text-lg-start mb-4 mb-lg-0">
+                                                    <div class="bg-light p-4 rounded-4">
+                                                        <div class="text-primary fw-bolder mb-2">Name: {{name}}</div>
+                                                        <div class="small fw-bolder">Category: {{category}}</div>
+                                                        <div class="small text-muted">Date: {{date}}</div>
+                                                        <div class="small text-muted">Time: {{time}}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <div>
+                                                        <a class="btn btn-primary px-4 py-3" href="#!">
+                                                            <div class="d-inline-block bi bi-update me-2"></div>
+                                                            Update
+                                                        </a>
+                                                        <a class="btn btn-primary px-4 py-3" href="#!">
+                                                            <div class="d-inline-block bi bi-delete me-2"></div>
+                                                            Delete
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{/cam_events}}
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    </main>
+    {{>footer}}
     </body>
 </html>
