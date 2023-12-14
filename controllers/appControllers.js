@@ -206,7 +206,26 @@ exports.manage_alumni = function(req, res){
 }
 
 exports.about = function(req, res){
-    res.redirect('/about.html');
+    events.find({}, function(err, events){
+        if(err){
+            console.log("Error occurred")
+        } else {
+            console.log("document retrieved: ", events);
+
+            //const nameMatchingEvents = matchingEvents.filter(event => event.name === name);
+            //const dateMatchingEvents = matchingEvents.filter(event => event.date === date);
+
+            const pro_events = events.filter(event=>event.category === 'Professional Development');
+            const net_events = events.filter(event=>event.category === 'Networking Event');
+            const cam_events = events.filter(event=>event.category === 'Campus Event');
+
+            res.render('about',{
+                pro_events,
+                net_events,
+                cam_events
+            })
+        }
+    })
 }
 
 exports.manage_events = function(req, res){
