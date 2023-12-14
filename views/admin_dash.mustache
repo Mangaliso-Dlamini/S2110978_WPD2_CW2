@@ -59,8 +59,52 @@
     // Send the request with the JSON payload
     xhr.send(JSON.stringify({ ident: ident }));
     }
+    
+    function delete_alumnus() {
+        
+        var parentGroup = event.target.closest('.alumni');
+
+        var ident = parentGroup.querySelector('#ident').textContent;
+
+
+
+    // Create a new XMLHttpRequest object
+    var xhr = new XMLHttpRequest();
+
+    // Configure it with the HTTP method, URL, and asynchronous flag
+    xhr.open('POST', 'http://localhost:3000/delete_alumnus', true);
+    
+    // Set the request header for JSON content
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    // Set up the callback functions to handle the response
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+            // Success, handle the response
+            //var data = JSON.parse(xhr.responseText);
+            console.log('Okay');
+            // Handle the response from the backend as needed
+        } else {
+            // Error, handle the error
+            console.error('Error sending data to backend. Status:', xhr.status, xhr);
+        }
+        }
+
+        
+    };
+
+    xhr.onerror = function() {
+        console.error('Network error occurred');
+    };
+
+
+    // Send the request with the JSON payload
+    xhr.send(JSON.stringify({ ident: ident }));
+    }
     </script>
 </head>
+
 <body>
     <main class="flex-shrink-0">
     {{>nav}}
@@ -71,51 +115,57 @@
                 <div class="card h-100" id="top_companies">
                     <h3>Users</h3>
                     {{#users}}
-                    <div>
-                    <p style="display: none;">{{_id}}</p>
-                    <p>Usermame: {{username}}</p>
-                    <p>Role: {{role}}</p>
-                    <button onclick="delete_user()">Delete</button>
-
-                        
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#{{_id}}">
-                          Update
-                        </button>
-                      
-                      <!-- The Modal -->
-                      <div class="modal" id="{{_id}}">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                      
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                              <h4 class="modal-title">Update User</h4>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                            </div>
-                      
-                            <!-- Modal body -->
-                            <div class="modal-body">
-                                <form action="/update user_role" method="post">
-                                    <input type="text"id="alumni_id" name="alumni_id" placeholder="username" value="{{username}}" required>
-                                    <select name="role" id="lore" value="{{role}}" required>
-                                        <option value="" disabled>Select Program</option>
-                                        <option value="admin">Admin</option>
-                                        <option value="user">User</option>
-                                    </select>
-                                       <button type="submit">Update Role</button>
-                                </form>
-                            </div>
-                      
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                            </div>
-                      
-                          </div>
-                        </div>
-                      </div>
-
-                    <hr>
+                    <div class="user">
+                      <table class="table">
+                        <p id= 'ident' name='ident' style="display: none;">{{_id}}</p>
+                            <tbody>
+                              <tr>
+                                <p id="ident" style="display: none;">{{_id}}</p>
+                                <td>Username: {{username}}</td>
+                                <td>Role: {{role}}</td>
+                                <td><button onclick="delete_user()">Delete</button></td>
+                                <td>
+                                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#{{_id}}">
+                                    Update
+                                  </button>
+                                
+                                <!-- The Modal -->
+                                <div class="modal" id="{{_id}}">
+                                  <div class="modal-dialog">
+                                    <div class="modal-content">
+                                
+                                      <!-- Modal Header -->
+                                      <div class="modal-header">
+                                        <h4 class="modal-title">Update User</h4>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                      </div>
+                                
+                                      <!-- Modal body -->
+                                      <div class="modal-body">
+                                          <form action="/update user_role" method="post">
+                                              <input type="text"id="alumni_id" name="alumni_id" placeholder="username" value="{{username}}" required>
+                                              <select name="role" id="lore" value="{{role}}" required>
+                                                  <option value="" disabled>Select Program</option>
+                                                  <option value="admin">Admin</option>
+                                                  <option value="user">User</option>
+                                              </select>
+                                                 <button type="submit">Update Role</button>
+                                          </form>
+                                      </div>
+                                
+                                      <!-- Modal footer -->
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                      </div>
+                                
+                                    </div>
+                                  </div>
+                                </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     {{/users}}
                     {{^users}}
                     <h4>Registered users appear here</h4>
@@ -124,7 +174,7 @@
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add_user">
                             Add user
                         </button>
-                      </div>
+                  
                       
                       <!-- The Modal -->
                       <div class="modal" id="add_user">
@@ -157,62 +207,70 @@
                         </div>
                       </div>
                 </div>
-                </div>
             </div>
             <div class="col-md-6">
                 <div class="card h-100">
                     <h3>Alumni Records</h3>
                     {{#alumni}}
-                    <div>
-                    <p id= 'ident' name='ident' style="display: none;">{{_id}}</p>
-                    <p>ID: {{_id}}</p>
-                    <p>Name: {{name}}</p>
-                    <p>Programme: {{program}}</p>
-                    <p>Class of: {{grad_year}}</p>
-                       <button onclick="delete_alumnus()">Delete</button>
-                        
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#{{_id}}">
-                          Update
-                        </button>
-                      
-                      
-                      <!-- The Modal -->
-                      <div class="modal" id="{{_id}}">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                      
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                              <h4 class="modal-title">Update Alumni Record</h4>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                            </div>
-                      
-                            <!-- Modal body -->
-                            <div class="modal-body">
-                                <form action="/update_alumnus" method="POST">
-                                    <input type="hidden" id="id" name="id" placeholder="Alumnus ID" value="{{_id}}" required>
-                                    <input type="text" id="name" name="name" placeholder="Alumnus Name"value="{{name}}" required>
-                                    <select name="program" id="program" value="{{program}}" required>
-                                        <option value="" disabled>Select Program</option>
-                                        <option value="Computing">Computing</option>
-                                        <option value="Business Management">Business Management</option>
-                                        <option value="Social Science">Social Science</option>
-                                    </select>
-                                    <input type="number" id="grad_year" name="grad_year" min="1900" max="2099" step="1" placeholder="Grad Year" value="{{grad_year}}" required >
-                                    <input type="reset" value="Reset">
-                                    <input type="submit" value="Add Alumnus">
-                                </form>
-                            </div>
-                      
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                            </div>
-                      
-                          </div>
-                        </div>
-                      </div>
-                    <hr>
+                    <div class="alumni">
+                      <table class="table">
+                        <p id= 'ident' name='ident' style="display: none;">{{_id}}</p>
+                            <tbody>
+                              <tr>
+                                <p id="ident" style="display: none;">{{_id}}</p>
+                                <td>{{_id}}</td>
+                                <td>{{name}}</td>
+                                <td>{{program}}</td>
+                                <td>{{grad_year}}</td>
+                              </tr>
+                              <tr>
+                                <td></td>
+                                <td></td>
+                                <td><button onclick="delete_alumnus()">Delete</button></td>
+                                <td>   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#{{_id}}">
+                                  Update
+                                </button>
+                              
+                              
+                              <!-- The Modal -->
+                              <div class="modal" id="{{_id}}">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                              
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                      <h4 class="modal-title">Update Alumni Record</h4>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                              
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        <form action="/update_alumnus" method="POST">
+                                            <input type="hidden" id="id" name="id" placeholder="Alumnus ID" value="{{_id}}" required>
+                                            <input type="text" id="name" name="name" placeholder="Alumnus Name"value="{{name}}" required>
+                                            <select name="program" id="program" value="{{program}}" required>
+                                                <option value="" disabled>Select Program</option>
+                                                <option value="Computing">Computing</option>
+                                                <option value="Business Management">Business Management</option>
+                                                <option value="Social Science">Social Science</option>
+                                            </select>
+                                            <input type="number" id="grad_year" name="grad_year" min="1900" max="2099" step="1" placeholder="Grad Year" value="{{grad_year}}" required >
+                                            <input type="reset" value="Reset">
+                                            <input type="submit" value="Add Alumnus">
+                                        </form>
+                                    </div>
+                              
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                              
+                                  </div>
+                                </div>
+                              </div></td>
+                              </tr>
+                            </tbody>
+                        </table>
                     {{/alumni}}
                     {{^alumni}}
                     <h4>Alumni records will appear here</h4>
@@ -258,29 +316,35 @@
                         </div>
                       </div>
                     </div>
-
+                  </div>
                 </div>
             </div>
-            </div>
+        </div>
         <div class="row" style="margin-top: 2rem;">
             <div class="col-md-12">
                 <div class="card h-100" id="top_companies">
                     <h3>Events</h3>
                     {{#events}}
                     <div class="event">
-                    <p id="ident" style="display: none;">{{_id}}</p>
-                    <p>Name: {{name}}</p>
-                    <p>Category: {{category}}</p>
-                    <p>Date: {{date}}</p>
-                    <p>Time: {{time}}</p>
-                    <button type="button" class="btn btn-primary" onclick="delete_event()">Delete</button>
-                    
-                        
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#{{_id}}">
-                          Update
-                        </button>
-                      
-                      <!-- The Modal -->
+                      <table class="table">
+                        <p id= 'ident' name='ident' style="display: none;">{{_id}}</p>
+                            <tbody>
+                              <tr>
+                                <p id="ident" style="display: none;">{{_id}}</p>
+                                <td>{{name}}</td>
+                                <td>{{category}}</td>
+                                <td>{{date}}</td>
+                                <td>{{time}}</td>
+                              </tr>
+                              <tr>
+                                <td></td>
+                                <td></td>
+                                <td><button type="button" class="btn btn-primary" onclick="delete_event()">Delete</button></td>
+                                <td>
+                                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#{{_id}}">
+                                  Update
+                                </button></button>
+                                <!-- The Modal -->
                       <div class="modal" id="{{_id}}">
                         <div class="modal-dialog">
                           <div class="modal-content">
@@ -318,8 +382,11 @@
                           </div>
                         </div>
                       </div>
-                      
-                    <hr>
+                              </td>
+                              </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     {{/events}}
                     {{^events}}
                     <h4>Events you organise will appear here</h4>
@@ -369,7 +436,7 @@
                     </div>
                 </div>
                 </div>
-            </div>
+            
         </div>
 
     </div>

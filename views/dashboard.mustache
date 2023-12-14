@@ -3,19 +3,6 @@
 <head>
     {{>header}}
 
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
-    <!-- MDB -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css" rel="stylesheet"/>
-
-    <!--jQuery-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
-
     <script>
         function unparticipate() {
         // Extract text content from the specified tag
@@ -151,64 +138,71 @@
     <div class="container" id="visualisation" style="margin-top: 2rem;">
             
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="card h-100" id="top_companies">
                     <h3>My Events</h3>
-                    {{#my_events}}
                     <div class="event">
-                    <p id="ident" style="display: none;">{{_id}}</p>
-                    <p>Name: {{name}}</p>
-                    <p>Category: {{category}}</p>
-                    <p>Date: {{date}}</p>
-                    <p>Time: {{time}}</p>
-                    <button type="button" class="btn btn-primary" onclick="delete_event()">Delete</button>
-                    
-                        
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#{{_d}}">
-                          Update
-                        </button>
-                      
-                      <!-- The Modal -->
-                      <div class="modal" id="{{_id}}">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                      
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                              <h4 class="modal-title">Update</h4>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                            </div>
-                      
-                            <!-- Modal body -->
-                            <div class="modal-body">
-                                <form action="/update_event" method="POST">
-                                    <input type="hidden" id="id" name="id" placeholder="Event ID" value="{{_id}}" required>
-                                    <input type="text" id="name" name="name" placeholder="Event Name" value="{{name}}" required>
-                                    <input type="text" id="organiser" name="organiser" placeholder="Organiser Name" value="{{organiser}}"required>
-                                    <select name="category" id="category " value="{{category}}" required>
-                                        <option value="" disabled>Select Category</option>
-                                        <option value="Professional Development">Professional Development</option>
-                                        <option value="Networking Event">Networking</option>
-                                        <option value="Campus Event">Campus Event</option>
-                                    </select>
-                                    <input type="date" id="date" name="date" value={{date}} required>
-                                    <input type="time" id="time" name="time" value={{time}} required>
-                                    <input type="reset" value="Reset">
-                                    <input type="submit" value="Update">
-                                </form>
-                            </div>
-                      
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                            </div>
-                      
-                          </div>
-                        </div>
-                      </div>
-                      
-                    <hr>
-                    {{/my_events}}
+                        {{#my_events}}
+                        <table class="table">
+                            <tbody>
+                              <tr>
+                                <p id="ident" style="display: none;">{{_id}}</p>
+                                <td>{{name}}</td>
+                                <td>{{category}}</td>
+                                <td>{{date}}</td>
+                                <td>{{time}}</td>
+                              </tr>
+                              <tr>
+                                <td></td>
+                                <td></td>
+                                <td><button type="button" class="btn btn-primary" onclick="delete_event()">Delete</button></td>
+                                <td>
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#{{_id}}">
+                                        Update
+                                      </button>
+                                      <div class="modal" id="{{_id}}">
+                                        <div class="modal-dialog">
+                                          <div class="modal-content">
+                                      
+                                            <!-- Modal Header -->
+                                            <div class="modal-header">
+                                              <h4 class="modal-title">Update</h4>
+                                              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                            </div>
+                                      
+                                            <!-- Modal body -->
+                                            <div class="modal-body">
+                                                <form action="/update_event" method="POST">
+                                                    <input type="hidden" id="id" name="id" placeholder="Event ID" value="{{_id}}" required>
+                                                    <input type="text" id="name" name="name" placeholder="Event Name" value="{{name}}" required>
+                                                    <input type="text" id="organiser" name="organiser" placeholder="Organiser Name" value="{{organiser}}"required>
+                                                    <select name="category" id="category " value="{{category}}" required>
+                                                        <option value="" disabled>Select Category</option>
+                                                        <option value="Professional Development">Professional Development</option>
+                                                        <option value="Networking Event">Networking</option>
+                                                        <option value="Campus Event">Campus Event</option>
+                                                    </select>
+                                                    <input type="date" id="date" name="date" value={{date}} required>
+                                                    <input type="time" id="time" name="time" value={{time}} required>
+                                                    <input type="reset" value="Reset">
+                                                    <input type="submit" value="Update">
+                                                </form>
+                                            </div>
+                                      
+                                            <!-- Modal footer -->
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                      
+                                          </div>
+                                        </div>
+                                      </div>              
+                                </td>
+                              </tr>
+                            </tbody>
+                        </table>
+                        {{/my_events}}
+                    </div>
                     {{^my_events}}
                     <h4>Events you organise will appear here</h4>
                     {{/my_events}}
@@ -255,24 +249,32 @@
                         </div>
                       </div>
                     </div>
-                </div>
+                
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="card h-100">
                     <h3>Events I Participate</h3>
                     {{#p_events}}
                     <div class="event">
-                    <p id= 'ident' name='ident' style="display: none;">{{_id}}</p>
-                    <p>Name: {{name}}</p>
-                    <p>Category: {{category}}</p>
-                    <p>Date: {{date}}</p>
-                    <p>Time: {{time}}</p>
-
-
-                    
-                    <button onclick="unparticipate()">Unparticipate</button>    
-                    <hr>
+                    <table class="table">
+                        <p id= 'ident' name='ident' style="display: none;">{{_id}}</p>
+                            <tbody>
+                              <tr>
+                                <p id="ident" style="display: none;">{{_id}}</p>
+                                <td>{{name}}</td>
+                                <td>{{category}}</td>
+                                <td>{{date}}</td>
+                                <td>{{time}}</td>
+                              </tr>
+                              <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><button onclick="unparticipate()">Unparticipate</button></td>
+                              </tr>
+                            </tbody>
+                        </table>
                     {{/p_events}}
                     {{^p_events}}
                     <h4>Events you participate in will appear here</h4>
@@ -287,13 +289,25 @@
                     <h3>Upcoming Events</h3>
                     {{#all_events}}
                     <div class="event">
-                    <p id="ident" style="display: none;">{{_id}}</p>
-                    <p>Name: {{name}}</p>
-                    <p>Category: {{category}}</p>
-                    <p>Date: {{date}}</p>
-                    <p>Time: {{time}}</p>
-                    <button onclick="participate()">Participate</button> 
-                    <hr>
+                        <table class="table">
+                            <p id= 'ident' name='ident' style="display: none;">{{_id}}</p>
+                                <tbody>
+                                  <tr>
+                                    <p id="ident" style="display: none;">{{_id}}</p>
+                                    <td>{{name}}</td>
+                                    <td>{{category}}</td>
+                                    <td>{{date}}</td>
+                                    <td>{{time}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><button onclick="participate()">Participate</button></td>
+                                  </tr>
+                                </tbody>
+                            </table>
+                    
                     {{/all_events}}
                     {{^all_events}}
                     <h4>Upcomming events will appear here</h4>

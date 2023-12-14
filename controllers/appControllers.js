@@ -63,9 +63,30 @@ exports.dashboard = function (req, res) {
 
             if (p_events) {
                 console.log('Participant events found:', p_events);
-
+                const query = {
+                    $or: [
+                      {
+                        organiser_id: { $ne: req.session.user.username },
+                        participants: { $not: { $in: [req.session.user.username] } }
+                      },
+                      {
+                        $or: [
+                          { organiser_id: { $exists: false } },
+                          { participants: { $exists: false } }
+                        ]
+                      }
+                    ]
+                  };
+                  
+                  
+                                    
                 // Find all events in the database
-                events.find({}, (err, all_events) => {
+                events.find({
+                    $and: [
+                        { $or: [{ organiser_id: { $ne: req.session.user.username } }, { organiser_id: { $exists: false } }] },
+                        { $or: [{ participants: {  $nin: [req.session.user.username] } }, { participants: { $exists: false } }] }
+                      ]  
+                }, (err, all_events) => {
                     if (err) {
                         console.error(err);
                         return res.status(500).send('Internal Server Error');
@@ -365,8 +386,9 @@ exports.add_alumnus = function(req, res){
 }
 
 exports.update_alumnus = function(req, res){
-    const query = {name: req.body.name}
-    const update ={$set:{grad_year: req.body.grad_year}}
+    const {id, name, program, grad_year} = req.body
+    const query = {_id: id}
+    const update ={$set:{name: name, program: program, grad_year: grad_year}}
     
     alumni.update(query, update,{}, function(err, docs){
         console.log(req.body)
@@ -374,20 +396,20 @@ exports.update_alumnus = function(req, res){
             console.log("error", err)
         }else{
             console.log("updated", docs)
-            res.redirect('/manage_alumni')
+            res.redirect('/admin_dashboard')
         }
     })
     
 }
 
 exports.delete_alumnus = function(req, res){
-    console.log(req.body)
-    alumni.remove({name: req.body.name},{}, function(err, numRemoved){
+    console.log(req.body);
+    alumni.remove({_id: req.body.ident},{}, function(err, numRemoved){
         if(err){
             console.log(err)
         }else{
             console.log(numRemoved, "documents deleted")
-            res.redirect('/manage_alumni')
+            res.redirect('/admin_dashboard')
         }
     })
 }
