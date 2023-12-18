@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="eng">
+    <head>
+    {{>header}}
+    <script>
+        function delete_event() {
+        
+        var parentGroup = event.target.closest('.card');
+
+        var ident = parentGroup.querySelector('#ident').textContent;
+
+
+
+        // Create a new XMLHttpRequest object
+        var xhr = new XMLHttpRequest();
+
+        // Configure it with the HTTP method, URL, and asynchronous flag
+        xhr.open('POST', 'http://localhost:3000/delete_event', true);
+        
+        // Set the request header for JSON content
+        xhr.setRequestHeader('Content-Type', 'application/json');
+
+        // Set up the callback functions to handle the response
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                // Success, handle the response
+                //var data = JSON.parse(xhr.responseText);
+                console.log('Okay');
+                // Handle the response from the backend as needed
+            } else {
+                // Error, handle the error
+                console.error('Error sending data to backend. Status:', xhr.status, xhr);
+            }
+            }
+
+            
+        };
+
+        xhr.onerror = function() {
+            console.error('Network error occurred');
+        };
+
+
+        // Send the request with the JSON payload
+        xhr.send(JSON.stringify({ ident: ident }));
+    }
+
+    function participate() {
+        
+        var parentGroup = event.target.closest('.event');
+
+        var ident = parentGroup.querySelector('#ident').textContent;
+
+
+
+    // Create a new XMLHttpRequest object
+    var xhr = new XMLHttpRequest();
+
+    // Configure it with the HTTP method, URL, and asynchronous flag
+    xhr.open('POST', 'http://localhost:3000/add_participant', true);
+    
+    // Set the request header for JSON content
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    // Set up the callback functions to handle the response
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+            // Success, handle the response
+            //var data = JSON.parse(xhr.responseText);
+            console.log('Okay');
+            // Handle the response from the backend as needed
+        } else {
+            // Error, handle the error
+            console.error('Error sending data to backend. Status:', xhr.status, xhr);
+        }
+        }
+
+        
+    };
+
+    xhr.onerror = function() {
+        console.error('Network error occurred');
+    };
+
+
+    // Send the request with the JSON payload
+    xhr.send(JSON.stringify({ ident: ident }));
+    }
+
+    </script>
+    </head>
+    <body>
+    <main class="flex-shrink-0">
+    {{>nav}}
+        <section class="bg-light py-5">
+            <div id="tab-1" class="tab-pane fade show p-0 active">
+                <section>
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h2 class="text-primary fw-bolder mb-0">Search results</h2>
+                    </div>
+                    <!-- Event Card-->
+                    {{#events}}
+                    <div class="card shadow border-0 rounded-4 mb-5">
+                        <div class="card-body p-5">
+                            <div class="row align-items-center gx-5">
+                                <div class="col text-center text-lg-start mb-4 mb-lg-0">
+                                    <div class="bg-light p-4 rounded-4">
+                                        <p id= 'ident' name='ident' style="display: none;">{{_id}}</p>
+                                        <div class="text-primary fw-bolder mb-2">Name: {{name}}</div>
+                                        <div class="small fw-bolder">Category: {{category}}</div>
+                                        <div class="small text-muted">Date: {{date}}</div>
+                                        <div class="small text-muted">Time: {{time}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8">
+                                    <div>
+                                        {{#isAuthenticated}}
+                                        <button onclick="participate()" type="button" class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" onclick="delete_event()">Participate</button>
+                                        {{/isAuthenticated}}
+                                        {{#isAdmin}}
+                                        <button onclick="delete_event()" type="button" class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" onclick="delete_event()">Delete</button>
+                                        <button type="button" class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" data-bs-toggle="modal" data-bs-target="#{{_id}}">
+                                            Update
+                                        </button>
+                                        <div class="modal" id="{{_id}}">
+                                            <div class="modal-dialog">
+                                            <div class="modal-content">
+                                        
+                                                <!-- Modal Header -->
+                                                <div class="modal-header">
+                                                <h4 class="modal-title">Update Event</h4>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                </div>
+                                        
+                                                <!-- Modal body -->
+                                                <div class="modal-body">
+                                                    <form action="/update_event" method="POST">
+                                                        <input type="hidden" id="id" name="id" placeholder="Event ID" value="{{_id}}" required>
+                                                        <input type="text" id="name" name="name" placeholder="Event Name" value="{{name}}" required>
+                                                        <input type="text" id="organiser" name="organiser" placeholder="Organiser Name" value="{{organiser}}"required>
+                                                        <select name="category" id="category " value="{{category}}" required>
+                                                            <option value="" disabled>Select Category</option>
+                                                            <option value="Professional Development">Professional Development</option>
+                                                            <option value="Networking Event">Networking</option>
+                                                            <option value="Campus Event">Campus Event</option>
+                                                        </select>
+                                                        <input type="date" id="date" name="date" value={{date}} required>
+                                                        <input type="time" id="time" name="time" value={{time}} required>
+                                                        <input type="reset" value="Reset">
+                                                        <input type="submit" value="Update">
+                                                    </form>
+                                                </div>
+                                        
+                                                <!-- Modal footer -->
+                                                <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                        
+                                            </div>
+                                            </div>
+                                        </div>
+                                        {{/isAdmin}}
+                                                    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/events}}
+                    {{^events}}
+                    <h2 class="text-primary fw-bolder mb-0">No Events found</h2>
+                    {{/events}}
+                </section>
+            </div>
+        </section>
+    </main>
+    {{>footer}}
+    </body>
+</html>

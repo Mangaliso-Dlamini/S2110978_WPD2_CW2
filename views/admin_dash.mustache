@@ -102,6 +102,49 @@
     // Send the request with the JSON payload
     xhr.send(JSON.stringify({ ident: ident }));
     }
+
+    function delete_user() {
+        
+        var parentGroup = event.target.closest('.user');
+
+        var ident = parentGroup.querySelector('#ident').textContent;
+
+
+
+    // Create a new XMLHttpRequest object
+    var xhr = new XMLHttpRequest();
+
+    // Configure it with the HTTP method, URL, and asynchronous flag
+    xhr.open('POST', 'http://localhost:3000/delete_user', true);
+    
+    // Set the request header for JSON content
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    // Set up the callback functions to handle the response
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+            // Success, handle the response
+            //var data = JSON.parse(xhr.responseText);
+            console.log('Okay');
+            // Handle the response from the backend as needed
+        } else {
+            // Error, handle the error
+            console.error('Error sending data to backend. Status:', xhr.status, xhr);
+        }
+        }
+
+        
+    };
+
+    xhr.onerror = function() {
+        console.error('Network error occurred');
+    };
+
+
+    // Send the request with the JSON payload
+    xhr.send(JSON.stringify({ ident: ident }));
+    }
     </script>
 </head>
 
@@ -123,9 +166,9 @@
                                 <p id="ident" style="display: none;">{{_id}}</p>
                                 <td>Username: {{username}}</td>
                                 <td>Role: {{role}}</td>
-                                <td><button onclick="delete_user()">Delete</button></td>
+                                <td><button class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" onclick="delete_user()">Delete</button></td>
                                 <td>
-                                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#{{_id}}">
+                                  <button type="button" class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" data-bs-toggle="modal" data-bs-target="#{{_id}}">
                                     Update
                                   </button>
                                 
@@ -142,9 +185,11 @@
                                 
                                       <!-- Modal body -->
                                       <div class="modal-body">
-                                          <form action="/update user_role" method="post">
-                                              <input type="text"id="alumni_id" name="alumni_id" placeholder="username" value="{{username}}" required>
-                                              <select name="role" id="lore" value="{{role}}" required>
+                                          <form action="/update_user" method="post">
+                                            <input type="hidden"id="user_id" name="user_id" placeholder="User ID" value="{{_id}}" required>
+                                              <input type="hidden"id="username" name="username" placeholder="Username" value="{{username}}" required>
+                                              <p>Username: {{username}}</p>
+                                              <select name="role" id="role" value="{{role}}" required>
                                                   <option value="" disabled>Select Program</option>
                                                   <option value="admin">Admin</option>
                                                   <option value="user">User</option>
@@ -171,7 +216,7 @@
                     <h4>Registered users appear here</h4>
                     {{/users}}
                         
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add_user">
+                        <button type="button" class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" data-bs-toggle="modal" data-bs-target="#add_user">
                             Add user
                         </button>
                   
@@ -226,8 +271,8 @@
                               <tr>
                                 <td></td>
                                 <td></td>
-                                <td><button onclick="delete_alumnus()">Delete</button></td>
-                                <td>   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#{{_id}}">
+                                <td><button class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" onclick="delete_alumnus()">Delete</button></td>
+                                <td>   <button type="button" class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" data-bs-toggle="modal" data-bs-target="#{{_id}}">
                                   Update
                                 </button>
                               
@@ -275,7 +320,7 @@
                     {{^alumni}}
                     <h4>Alumni records will appear here</h4>
                     {{/alumni}}
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add_record">
+                    <button type="button" class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" data-bs-toggle="modal" data-bs-target="#add_record">
                         Add Alumni Record
                       </button>
                     
@@ -339,9 +384,9 @@
                               <tr>
                                 <td></td>
                                 <td></td>
-                                <td><button type="button" class="btn btn-primary" onclick="delete_event()">Delete</button></td>
+                                <td><button type="button" class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" onclick="delete_event()">Delete</button></td>
                                 <td>
-                                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#{{_id}}">
+                                  <button type="button" class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" data-bs-toggle="modal" data-bs-target="#{{_id}}">
                                   Update
                                 </button></button>
                                 <!-- The Modal -->
@@ -392,7 +437,7 @@
                     <h4>Events you organise will appear here</h4>
                     {{/events}}
                     
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add_modal">
+                    <button type="button" class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" data-bs-toggle="modal" data-bs-target="#add_modal">
                         Add New Event
                       </button>
                     

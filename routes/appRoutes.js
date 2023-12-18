@@ -16,7 +16,7 @@ router.post("/view_event", controller.view_event)
 router.post("/add_event", controller.add_event)
 router.post("/update_event", controller.update_event);
 router.post("/delete_event", controller.delete_event);
-router.post('/all_events', controller.all_events);
+router.get('/all_events', auth.isAuthenticated, controller.all_events);
 
 //CRUD routes - Alumni records
 router.post("/view_alumnus", controller.view_alumnus)
@@ -39,6 +39,9 @@ router.post("/login", controller.post_login);
 router.get('/logout', controller.logout);
 
 router.get('/loggedIn_landing', auth.isAuthenticated, controller.loggedIn_landing);
+
+router.post('/delete_user', controller.delete_user)
+router.post('/update_user', controller.update_user)
 
 // Routes
 /*router.get('/', auth.isAuthenticated, (req, res) => {

@@ -88,7 +88,7 @@
         xhr.send(JSON.stringify({ ident: ident }));
         }
 
-        function delete_event() {
+    function delete_event() {
         
         var parentGroup = event.target.closest('.event');
 
@@ -96,39 +96,39 @@
 
 
 
-    // Create a new XMLHttpRequest object
-    var xhr = new XMLHttpRequest();
+        // Create a new XMLHttpRequest object
+        var xhr = new XMLHttpRequest();
 
-    // Configure it with the HTTP method, URL, and asynchronous flag
-    xhr.open('POST', 'http://localhost:3000/delete_event', true);
-    
-    // Set the request header for JSON content
-    xhr.setRequestHeader('Content-Type', 'application/json');
-
-    // Set up the callback functions to handle the response
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4) {
-        if (xhr.status === 200) {
-            // Success, handle the response
-            //var data = JSON.parse(xhr.responseText);
-            console.log('Okay');
-            // Handle the response from the backend as needed
-        } else {
-            // Error, handle the error
-            console.error('Error sending data to backend. Status:', xhr.status, xhr);
-        }
-        }
-
+        // Configure it with the HTTP method, URL, and asynchronous flag
+        xhr.open('POST', 'http://localhost:3000/delete_event', true);
         
-    };
+        // Set the request header for JSON content
+        xhr.setRequestHeader('Content-Type', 'application/json');
 
-    xhr.onerror = function() {
-        console.error('Network error occurred');
-    };
+        // Set up the callback functions to handle the response
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                // Success, handle the response
+                //var data = JSON.parse(xhr.responseText);
+                console.log('Okay');
+                // Handle the response from the backend as needed
+            } else {
+                // Error, handle the error
+                console.error('Error sending data to backend. Status:', xhr.status, xhr);
+            }
+            }
+
+            
+        };
+
+        xhr.onerror = function() {
+            console.error('Network error occurred');
+        };
 
 
-    // Send the request with the JSON payload
-    xhr.send(JSON.stringify({ ident: ident }));
+        // Send the request with the JSON payload
+        xhr.send(JSON.stringify({ ident: ident }));
     }
     </script>
 </head>
@@ -155,9 +155,9 @@
                               <tr>
                                 <td></td>
                                 <td></td>
-                                <td><button type="button" class="btn btn-primary" onclick="delete_event()">Delete</button></td>
+                                <td><button type="button" class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" onclick="delete_event()">Delete</button></td>
                                 <td>
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#{{_id}}">
+                                    <button type="button" class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" data-bs-toggle="modal" data-bs-target="#{{_id}}">
                                         Update
                                       </button>
                                       <div class="modal" id="{{_id}}">
@@ -166,7 +166,7 @@
                                       
                                             <!-- Modal Header -->
                                             <div class="modal-header">
-                                              <h4 class="modal-title">Update</h4>
+                                              <h4 class="modal-title">Update Event</h4>
                                               <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                             </div>
                                       
@@ -207,7 +207,7 @@
                     <h4>Events you organise will appear here</h4>
                     {{/my_events}}
                     
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add_modal">
+                    <button type="button" class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" data-bs-toggle="modal" data-bs-target="#add_modal">
                         Add New Event
                       </button>
                     
@@ -218,7 +218,7 @@
                     
                           <!-- Modal Header -->
                           <div class="modal-header">
-                            <h4 class="modal-title">Update</h4>
+                            <h4 class="modal-title">Add New Event</h4>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                           </div>
                     
@@ -271,7 +271,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td><button onclick="unparticipate()">Unparticipate</button></td>
+                                <td><button class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" onclick="unparticipate()">Unparticipate</button></td>
                               </tr>
                             </tbody>
                         </table>
@@ -303,7 +303,7 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td><button onclick="participate()">Participate</button></td>
+                                    <td><button class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" onclick="participate()">Participate</button></td>
                                   </tr>
                                 </tbody>
                             </table>
@@ -312,9 +312,48 @@
                     {{^all_events}}
                     <h4>Upcomming events will appear here</h4>
                     {{/all_events}}
-                    <button>View all</button>
-                    <button>Add Event</button>
-                    <button>Search</button>
+                    <a href="/all_events">
+                      <button type="button" class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder">
+                        View All Events
+                      </button>
+                    </a>
+                    <button type="button" class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" data-bs-toggle="modal" data-bs-target="#search_modal">
+                      Search Events
+                    </button>
+
+                    <div class="modal" id="search_modal">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                    
+                          <!-- Modal Header -->
+                          <div class="modal-header">
+                            <h4 class="modal-title">Search Events</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                          </div>
+                    
+                          <!-- Modal body -->
+                          <div class="modal-body">
+                            <form action="/view_event" method="post">
+                              <input type="text" id="name" name="name" placeholder="Event Name"  required>
+                              <button type="reset">Reset</button>
+                              <button type="submit">Search</button>
+                          </form>
+                  
+                          </div>
+                    
+                          <!-- Modal footer -->
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                          </div>
+                    
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <button type="button" class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" data-bs-toggle="modal" data-bs-target="#add_modal">
+                        Add New Event
+                      </button>
+                      
                 </div>
             </div>
         </div>

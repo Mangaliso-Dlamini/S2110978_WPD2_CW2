@@ -1,1 +1,7 @@
-{"name":"George Foreman","program":"Business Management","grad_year":"1999","_id":"4w85Rv7r1ZFNxPly"}
+{"_id":"TZ101","name":"John Doe","program":"Computing","grad_year":"2024"}
+{"_id":"TZ111","name":"Virat Kohli","program":"Social Science","grad_year":"2024"}
+{"_id":"TZ112","name":"George Foreman","program":"Computing","grad_year":"2024"}
+{"_id":"TZ113","name":"Shreyas Iyer","program":"Business Management","grad_year":"2024"}
+{"_id":"TZ114","name":"Rishabh Pant","program":"Business Management","grad_year":"2024"}
+{"_id":"TZ115","name":"Rohit Sharma","program":"Computing","grad_year":"2024"}
+{"$$deleted":true,"_id":"TZ112"}
