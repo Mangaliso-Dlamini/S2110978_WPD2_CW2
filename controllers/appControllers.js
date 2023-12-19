@@ -1,4 +1,4 @@
-const {alumni, events} = require('../models/appModel');
+const {alumni, events} = require('../models/appModel.js');
 const userDao = require('../models/userMD.js');
 //const auth = require('../auth/auth.js');
 const {ensureLoggedIn} = require('connect-ensure-login');
@@ -66,37 +66,18 @@ exports.dashboard = function (req, res) {
 
             if (p_events) {
                 console.log('Participant events found:', p_events);
-                const query = {
-                    $or: [
-                      {
-                        organiser_id: { $ne: req.session.user.username },
-                        participants: { $not: { $in: [req.session.user.username] } }
-                      },
-                      {
-                        $or: [
-                          { organiser_id: { $exists: false } },
-                          { participants: { $exists: false } }
-                        ]
-                      }
-                    ]
-                  };
-                  
-                  
                                     
                 // Find all other events in the database
-                events.find({
-                    $and: [
-                        { $or: [{ organiser_id: { $ne: req.session.user.username } }, { organiser_id: { $exists: false } }] },
-                        { $or: [{ participants: {  $nin: [req.session.user.username] } }, { participants: { $exists: false } }] }
-                      ]  
-                }, (err, all_events) => {
+                events.find({ }, (err, events) => {
                     if (err) {
                         console.error(err);
                         return res.status(500).send('Internal Server Error');
                     }
 
-                    if (all_events) {
-                        console.log('All events found:', all_events);
+                    if (events) {
+                        console.log('All events found:', events);
+                        const not_org_events = events.filter(event => event.organiser_id !== req.session.user.username);
+                        const all_events = not_org_events.filter(event => !event.participants || event.participants.indexOf(req.session.user.username) === -1);
 
                         // Combine all sets of events into a single object
                         const allEvents = {
@@ -311,6 +292,7 @@ exports.all_events = function(req, res){
         }
     })
 }
+
 exports.add_participant = function(req, res){
     const id = req.body.ident;
     console.log(id)
@@ -320,47 +302,52 @@ exports.add_participant = function(req, res){
             return;
         }
         if(event){
-            if(!event.participant){
-                event.participant = [];
-            }
+            if (!event.participants) {
+                event.participants = [];
+              }
+          
+            event.participants.push(req.session.user.username)
 
-            event.participant.push(req.session.user.username);
-
-            events.update({_id: id}, {$set: {participants: event.participant }},{},function(updateErr, numUpdated){
+            events.update({ _id: id }, { $set: { participants: event.participants } }, {}, (updateErr, numUpdated) => {
                 if (updateErr) {
-                    console.error(updateErr);
+                  console.error(updateErr);
                 } else {
-                    console.log(`Updated ${numUpdated} document(s) with the new name.`);
-                    res.redirect(req.get('referer'));
+                  console.log(`${numUpdated} document(s) updated`);
                 }
-            })
-    } else {
-        console.log('Document not found.');
-    }
+              });
+          
+        } else {
+            console.log('Document not found.');
+        }
 });
 }
 
 exports.unparticipate = function(req, res){
-    user = req.session.user
-    console.log(req.body.ident);
-    console.log(user)
-    events.update(
-        { _id: req.body.ident },
-        { $pull: { participants: user.username } },
-        {},
-        (err, numRemoved) => {
-          if (err) {
-            console.error('Error removing name:', err);
+    const id = req.body.ident;
+    console.log(id)
+    events.findOne({_id: id}, function(err, event){
+        if (err) {
+            console.error(err);
             return;
-          }
-    
-          console.log(`Removed ${numRemoved} occurrence(s) of '${user.username}' from event ${req.body.ident}`);
-          res.redirect(req.get('referer'))
-
-          //res.json({ success: true, message: 'Text received successfully.' });
         }
-      );
-    }
+        if(event){
+
+            event.participants = event.participants.filter(item => item !== req.session.user.username);
+
+
+            events.update({ _id: id }, { $set: { participants: event.participants } }, {}, (updateErr, numUpdated) => {
+                if (updateErr) {
+                  console.error(updateErr);
+                } else {
+                  console.log(`${numUpdated} document(s) updated`);
+                }
+              });
+          
+        } else {
+            console.log('Document not found.');
+        }
+});
+}
 
 /****************************************************************************/
 
